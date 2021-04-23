@@ -1,22 +1,22 @@
 {
-  "name": "leadmanager",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "author": "Utkarsh Mishra",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.5",
-    "mongoose-sequence": "^5.2.0"
-  }
+	"name": "leadmanager",
+	"version": "2.0.0",
+	"description": "",
+	"main": "./server/index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node ./server/index.js"
+	},
+	"author": "Utkarsh Mishra",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.7.5",
+		"mongoose-sequence": "^5.2.0"
+	}
 }
