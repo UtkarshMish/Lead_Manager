@@ -5,7 +5,7 @@ let DB = null;
 export async function connectDB() {
 	const { URL, DB_PORT } = process.env;
 	const URI = `mongodb://${URL}:&${DB_PORT}/leadManager?retryWrites=true`;
-	const OPTIONS = { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true };
+	const OPTIONS = { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: true };
 	const connectedDB = await mongoose.connect(URI, OPTIONS);
 	DB = connectedDB;
 	console.log("CONNECTED DB !!");

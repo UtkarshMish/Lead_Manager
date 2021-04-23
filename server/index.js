@@ -6,13 +6,18 @@ import UserSchema from "./database/UserSchema.js";
 import JsonWebToken from "jsonwebtoken";
 import { join } from "path";
 import LeadDetails from "./database/LeadDetails.js";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(express.static(join("./", "public")));
 connectDB();
 //USE CORS METHOD
 app.use(cors());
+
 //Get The Lead Details
 app.get("/api/leaddetails", async (_reqst, res) => {
 	let query = LeadDetails.find({}, null);
@@ -29,7 +34,6 @@ app.post("/api/newlead", async (reqst, res) => {
 		area: reqst.body.area,
 		enquiry_date: reqst.body.enquiry_date,
 	});
-	console.log(newLead);
 	try {
 		let { errors } = await newLead.save();
 		if (!errors) {
@@ -42,7 +46,7 @@ app.post("/api/newlead", async (reqst, res) => {
 //Get the user Details
 app.post("/api/auth", async (req, res) => {
 	const userInput = { username: req.body.username, password: req.body.password };
-	const query = UserSchema.find(userInput, null);
+	const query = UserSchema.findOne(userInput);
 	try {
 		const response = await query.exec();
 		if (response && response.password === userInput.password) {
@@ -54,9 +58,8 @@ app.post("/api/auth", async (req, res) => {
 		return res.send({ auth: false, error: err.message });
 	}
 });
-
-app.use("*", function (_req, res) {
-	res.sendFile(join("./public", "index.html"));
+app.use(["/*"], function handleRequest(_req, res, _next) {
+	return res.sendFile(join(__dirname, "../public", "index.html"));
 });
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log("server strted on port: " + port));
